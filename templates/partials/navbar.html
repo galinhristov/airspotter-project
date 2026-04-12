@@ -1,0 +1,16 @@
+<nav>
+    <a href="{% url 'home' %}">Home</a>
+    <a href="#">Sightings</a>
+    <a href="#">Aircraft</a>
+    <a href="#">Airports</a>
+
+    {% if user.is_authenticated %}
+        <a href="#">Dashboard</a>
+        <a href="#">Profile</a>
+        <a href="#">Logout</a>
+    {% else %}
+        <a href="#">Login</a>
+        <a href="#">Register</a>
+    {% endif %}
+
+</nav>
