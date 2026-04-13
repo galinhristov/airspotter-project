@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Dashboard</h1>
+
+    <p>Welcome, {{ request.user.username }}.</p>
+
+    <ul>
+        <li>My sightings: {{ own_sightings_count }}</li>
+        <li>My collections: {{ own_collections_count }}</li>
+        <li>Favourite sightings: {{ favourite_sightings_count }}</li>
+    </ul>
+
+    <p>
+        <a href="{% url 'profile-details' pk=request.user.pk %}">My profile</a>
+    </p>
+{% endblock %}

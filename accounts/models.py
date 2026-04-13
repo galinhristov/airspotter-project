@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+
 class AirSpotterUser(AbstractUser):
     display_name = models.CharField(
         max_length=50,
@@ -20,6 +21,11 @@ class AirSpotterUser(AbstractUser):
         max_length=50,
         blank=True,
         null=True,
+    )
+    favorite_sightings = models.ManyToManyField(
+        'sightings.Sighting',
+        blank=True,
+        related_name='favorited_by',
     )
 
     def __str__(self):

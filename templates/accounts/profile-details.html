@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Profile Details</h1>
+
+    {% if profile.avatar %}
+        <img src="{{ profile.avatar.url }}" alt="{{ profile.username }}" width="200px">
+    {% endif %}
+
+    <p><strong>Username:</strong> {{ profile.username }}</p>
+    <p><strong>Username:</strong> {{ profile.username }}</p>
+    <p><strong>Email:</strong> {{ profile.email }}</p>
+    <p><strong>Country:</strong> {{ profile.country }}</p>
+    <p><strong>Bio:</strong> {{ profile.bio }}</p>
+
+    {% if request.user.pk == profile.pk %}
+        <a href="{% url 'profile-edit' pk=profile.pk %}">Edit profile</a>
+    {% endif %}
+{% endblock %}
