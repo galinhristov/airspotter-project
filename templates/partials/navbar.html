@@ -1,6 +1,9 @@
 <nav>
     <a href="{% url 'home' %}">Home</a>
-    <a href="#">Sightings</a>
+    <a href="{% url 'sighting-list' %}">Sightings</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'sighting-create' %}">Add Sighting</a>
+    {% endif %}
     <a href="#">Aircraft</a>
     <a href="#">Airports</a>
 

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-
+from django.contrib.auth.models import PermissionsMixin
 
 UserModel = get_user_model()
 
@@ -77,14 +77,4 @@ class AirSpotterUserEditForm(forms.ModelForm):
             'bio': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Write a short bio'}),
             'country': forms.TextInput(attrs={'placeholder': 'Enter country'}),
         }
-
-
-
-
-
-
-
-
-
-
 

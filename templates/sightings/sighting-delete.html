@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Delete Sighting</h1>
+
+    <p>Are you sure you want to delete this sighting?</p>
+
+    <ul>
+        <li><strong>Title:</strong> {{ sighting.title }}</li>
+        <li><strong>Description:</strong> {{ sighting.description }}</li>
+        <li><strong>Spotted at:</strong> {{ sighting.spotted_at }}</li>
+        <li><strong>Aircraft:</strong> {{ sighting.aircraft }}</li>
+        <li><strong>Airport:</strong> {{ sighting.airport }}</li>
+        <li><strong>Status:</strong> {{ sighting.status }}</li>
+        <li><strong>Visibility:</strong> {{ sighting.visibility }}</li>
+    </ul>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm Delete</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ sighting.title }}</h1>
+    <p><strong>Description:</strong> {{ sighting.description }}</p>
+    <p><strong>Spotted at:</strong> {{ sighting.spotted_at }}</p>
+    <p><strong>Aircraft:</strong> {{ sighting.aircraft }}</p>
+    <p><strong>Airport:</strong> {{ sighting.airport }}</p>
+    <p><strong>Owner:</strong> {{ sighting.owner }}</p>
+    <p><strong>Status:</strong> {{ sighting.status }}</p>
+    <p><strong>Visibility:</strong> {{ sighting.visibility }}</p>
+
+    <p>
+        <strong>Tags:</strong>
+        {% for tag in sighting.tags.all %}
+            {{ tag.name }}{% if not forloop.last %}, {% endif %}
+        {% empty %}
+            No tags
+        {% endfor %}
+    </p>
+
+    {% if request.user == sighting.owner %}
+        <p>
+            <a href="{% url 'sighting-edit' pk=sighting.pk %}">Edit</a>
+            <a href="{% url 'sighting-delete' pk=sighting.pk %}">Delete</a>
+        </p>
+    {% endif %}
+{% endblock %}

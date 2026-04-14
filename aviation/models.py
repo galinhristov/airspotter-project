@@ -2,14 +2,37 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 
+def validate_airline_icao_code(value):
+    if len(value) != 3:
+        raise ValidationError('Airline ICAO code must be exactly 3 characters.')
+
+
+def validate_airline_iata_code(value):
+    if len(value) != 2:
+        raise ValidationError('Airline IATA code must be exactly 2 characters.')
+
+
+def validate_airport_icao_code(value):
+    if len(value) != 4:
+        raise ValidationError('Airport ICAO code must be exactly 4 characters.')
+
+
+def validate_airport_iata_code(value):
+    if len(value) != 3:
+        raise ValidationError('Airport IATA code must be exactly 3 characters.')
+
+
+#=====================================================
+# Compatibility validators for old migration file only
 def validate_icao_code(value):
     if len(value) != 4:
-        raise ValidationError('ICAO code must be exactly 4 characters.')
+        raise ValidationError('Airport ICAO code must be exactly 4 characters.')
 
 
 def validate_iata_code(value):
     if len(value) != 3:
-        raise ValidationError('IATA code must be exactly 3 characters.')
+        raise ValidationError('Airport IATA code must be exactly 3 characters.')
+
 
 
 class Airline(models.Model):
@@ -18,14 +41,14 @@ class Airline(models.Model):
         unique=True,
     )
     icao_code = models.CharField(
-        max_length=4,
-        unique=True,
-        validators=[validate_icao_code],
-    )
-    iata_code = models.CharField(
         max_length=3,
         unique=True,
-        validators=[validate_iata_code],
+        validators=[validate_airline_icao_code],
+    )
+    iata_code = models.CharField(
+        max_length=2,
+        unique=True,
+        validators=[validate_airline_iata_code],
     )
     country = models.CharField(
         max_length=60,
@@ -54,12 +77,12 @@ class Airport(models.Model):
     icao_code = models.CharField(
         max_length=4,
         unique=True,
-        validators=[validate_icao_code],
+        validators=[validate_airport_icao_code],
     )
     iata_code = models.CharField(
         max_length=3,
         unique=True,
-        validators=[validate_iata_code],
+        validators=[validate_airport_iata_code],
     )
     city = models.CharField(
         max_length=80,

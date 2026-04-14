@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>All Sightings</h1>
+
+    {% if user.is_authenticated %}
+        <p><a href="{% url 'sighting-create' %}">Create New Sighting</a></p>
+    {% endif %}
+
+    {% if sightings %}
+        <ul>
+            {% for sighting in sightings %}
+                <li>
+                    <a href="{% url 'sighting-details' pk=sighting.pk %}">
+                        {{ sighting.title }}
+                    </a>
+                    - {{ sighting.aircraft }} at {{ sighting.airport }}
+                    on {{ sighting.spotted_at }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No sightings yet.</p>
+    {% endif %}
+{% endblock %}
