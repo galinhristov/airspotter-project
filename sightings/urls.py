@@ -6,6 +6,9 @@ from sightings.views import (
     SightingCreateView,
     SightingUpdateView,
     SightingDeleteView,
+    SightingPhotoCreateView,
+    SightingPhotoUpdateView,
+    SightingPhotoDeleteView,
 )
 
 urlpatterns = (
@@ -14,4 +17,8 @@ urlpatterns = (
     path('<int:pk>/', SightingDetailView.as_view(), name='sighting-details'),
     path('<int:pk>/edit/', SightingUpdateView.as_view(), name='sighting-edit'),
     path('<int:pk>/delete/', SightingDeleteView.as_view(), name='sighting-delete'),
+
+    path('<int:pk>/photos/add/', SightingPhotoCreateView.as_view(), name='photo-create'),
+    path('photos/<int:pk>/edit/', SightingPhotoUpdateView.as_view(), name='photo-edit'),
+    path('photos/<int:pk>/delete/', SightingPhotoDeleteView.as_view(), name='photo-delete'),
 )

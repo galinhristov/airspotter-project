@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Delete Photo</h1>
+
+    <p>Are you sure you want to delete this photo?</p>
+
+    {% if photo.image %}
+        <p>
+            <img src="{{ photo.image.url }}" alt="{{ photo.caption }}" width="300">
+        </p>
+    {% endif %}
+
+    <p><strong>Caption:</strong> {{ photo.caption }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm Delete</button>
+    </form>
+
+    <p>
+        <a href="{% url 'sighting-details' pk=photo.sighting.pk %}">Cancel</a>
+    </p>
+{% endblock %}

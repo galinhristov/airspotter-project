@@ -25,4 +25,35 @@
             <a href="{% url 'sighting-delete' pk=sighting.pk %}">Delete</a>
         </p>
     {% endif %}
+
+    <h2>Photos</h2>
+    {% if request.user == sighting.owner %}
+        <p>
+            <a href="{% url 'photo-create' pk=sighting.pk %}">Add Photo</a>
+        </p>
+    {% endif %}
+
+    {% if sighting.photos.all %}
+        <ul>
+            {% for photo in sighting.photos.all %}
+                <li>
+                    <p>
+                        <img src="{{ photo.image.url }}" alt="{{ photo.caption }}" width="300">
+                    </p>
+                    <p><strong>Caption:</strong> {{ photo.caption }}</p>
+                    <p><strong>Uploaded by:</strong> {{ photo.uploaded_by }}</p>
+
+                    {% if request.user == photo.uploaded_by %}
+                        <p>
+                            <a href="{% url 'photo-edit' pk=photo.pk %}">Edit Photo</a>
+                            <a href="{% url 'photo-delete' pk=photo.pk %}">Delete Photo</a>
+                        </p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No photos uploaded yet.</p>
+    {% endif %}
+
 {% endblock %}

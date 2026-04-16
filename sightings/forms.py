@@ -1,5 +1,6 @@
 from django import forms
-from sightings.models import Sighting
+from sightings.models import Sighting, SightingPhoto
+
 
 class BaseSightingForm(forms.ModelForm):
     class Meta:
@@ -50,3 +51,33 @@ class SightingDeleteForm(BaseSightingForm):
 
         for _, field in self.fields.items():
             field.disabled = True
+
+
+
+
+class BaseSightingForm(forms.ModelForm):
+    class Meta:
+        model = SightingPhoto
+        fields = (
+            'image',
+            'caption',
+        )
+        labels = {
+            'image': 'Photo',
+            'caption': 'Caption',
+        }
+        help_texts = {
+            'caption': 'Optional short description of the uploaded photo.',
+        }
+        widgets = {
+            'caption': forms.TextInput(attrs={'placeholder': 'Enter a short caption'})
+        }
+
+
+class SightingPhotoCreateForm(BaseSightingForm):
+    pass
+
+
+class SightingPhotoEditForm(BaseSightingForm):
+    pass
+

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Edit Photo</h1>
+
+    {% if photo.image %}
+        <p>
+            <img src="{{ photo.image.url }}" alt="{{ photo.caption }}" width="300">
+        </p>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+{% endblock %}
