@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Delete Collection</h1>
+
+    <p>Are you sure you want to delete this collection?</p>
+
+    <ul>
+        <li><strong>Title:</strong> {{ collection.title }}</li>
+        <li><strong>Description:</strong> {{ collection.description }}</li>
+        <li><strong>Visibility:</strong> {{ collection.is_public|yesno:"Public,Private" }}</li>
+    </ul>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm Delete</button>
+    </form>
+
+    <p>
+        <a href="{% url 'collection-details' pk=collection.pk %}">Cancel</a>
+    </p>
+{% endblock %}

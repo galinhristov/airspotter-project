@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ collection.title }}</h1>
+
+    <p><strong>Description:</strong>{{ collection.description }}</p>
+    <p><strong>Visibility:</strong>{{ collection.is_public|yesno:"Public,Private" }}</p>
+    <p><strong>Owner:</strong>{{ collection.owner }}</p>
+
+    <p>
+        <a href="{% url 'collection-edit' pk=collection.pk %}">Edit</a>
+        <a href="{% url 'collection-delete' pk=collection.pk %}">Delete</a>
+    </p>
+
+    <h2>Included Sightings</h2>
+
+    {% if collection.sightings.all %}
+        <ul>
+            {% for sighting in collection.sightings.all %}
+                <li>
+                    <a href="{% url 'sighting-details' pk=sighting.pk %}">
+                        {{ sighting.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No sightings in this collection yet.</p>
+    {% endif %}
+
+{% endblock %}

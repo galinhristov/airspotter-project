@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>My Collections</h1>
+    <p>
+        <a href="{% url 'collection-create' %}">Create Collection</a>
+    </p>
+
+    {% if collections %}
+        <ul>
+            {% for collection in collections %}
+                <li>
+                    <a href="{% url 'collection-details' pk=collection.pk %}">
+                        {{ collection.title }}
+                        {% if collection.is_public %}
+                            (Public)
+                        {% else %}
+                            (Private)
+                        {% endif %}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You do not have any collections yet. </p>
+    {% endif %}
+{% endblock %}
