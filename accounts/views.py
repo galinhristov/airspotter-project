@@ -9,6 +9,7 @@ from accounts.forms import (
     AirSpotterLoginForm,
     AirSpotterUserEditForm,
 )
+from core.tasks import send_welcome_email, send_welcome_email_async
 
 UserModel = get_user_model()
 
@@ -19,6 +20,13 @@ class RegisterView(CreateView):
     form_class = AirSpotterUserCreationForm
     template_name = 'accounts/register.html'
     success_url = reverse_lazy('login')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+
+        if self.object.email:
+            send_welcome_email_async(self.object.email)
+        return response
 
 
 
