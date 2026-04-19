@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>404 - Page Nor Found</h1>
+    <p>The page you requested could not be found.</p>
+    <p>It may have been moved, deleted, or the address may be incorrect.</p>
+    <p>
+        <a href="{% url 'home' %}">Go to Home</a>
+    </p>
+{% endblock %}
